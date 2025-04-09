@@ -21,9 +21,13 @@ This document should explain the HTML data structure of this date, founded on [e
   - Logic: IGNORED when extracting column header titles.
 - <th>[1] onwards: Data column headers
   - Contains: Typically an <a> tag holding the column title text (e.g., "Route", "Residential", "Business", "Total", "Age...", "Size", "Income", "Cost"). May contain other elements like <img> (sort icons) or <span> (age range).
+
   - Purpose: Defines the meaning of the data in the corresponding column below.
+
   - Logic: Select all thead th, skip the first one (.slice(1)), then extract text using th.textContent.replace(/\s+/g, ' ').trim() to get the clean header title.
-  - **Note**: The <th> containing "Business" (identified by id="businessTableHeader") may be absent in the "Residential Only" view. The logic dynamically counts the present headers.
+
+  - **Note**: The <th> containing "Business" (```html identified by id="businessTableHeader"```) may be absent in the "Residential Only" view. The logic dynamically counts the present headers.
+
 3. **Table body** (```html<tbody>```)
 - Structure: Contains multiple table rows (<tr>), each representing a specific EDDM route.
 4. **Data rows** (```html<tr>```)
