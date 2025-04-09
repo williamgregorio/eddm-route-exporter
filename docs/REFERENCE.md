@@ -30,3 +30,8 @@ This document should explain the HTML data structure of this date, founded on [e
 - Selector: tr.list-items (within the <tbody>)
   - (Also has valign="top" attribute <<SOME WILL BE EMPTY>>)
 - Structure: Each row contains multiple table data cells (<td>).
+5. **Data cells**  (```html<td> within tr.list-items```):
+- <td>[0] (index 0): Row selection checkbox
+  - Contains: label > input.routeChex (Class routeChex is key). The input also has data-route-info and id attributes specific to the route.
+  - Purpose: Allows user selection of individual rows. Its checked status determines if the row is exported in "Export Selected" mode.
+  - Logic: IGNORED when extracting data values for the CSV columns. Checked status read via row.querySelector('td:first-child input.routeChex')?.checked.
