@@ -7,10 +7,11 @@ This document should explain the HTML data structure of this date, founded on [e
 **Note**: A user may choose between residential and business or just residential, the code is able to adapt to such changes.
 
 1. **Main table container**:
-- Selector: table.target-audience-table
-  - Also has class col-12, but target-audience-table seems more specific
-- Structure: Standard HTML table containing one <thead> and one <tbody> element.
-- Code reference: Targeted by document.querySelector('table.target-audience-table').
+
+    - **Selector**: `table.target-audience-table`
+      - Also has class `col-12`, but target-audience-table seems more specific
+    - **Structure**: Standard HTML table containing one `<thead>` and one `<tbody>` element.
+    - **Code reference**: Targeted by `document.querySelector('table.target-audience-table')`.
 
 2. **Table header** (`<thead>`)
 
@@ -28,16 +29,19 @@ This document should explain the HTML data structure of this date, founded on [e
             - **Note**: The `<th>` containing "Business" (identified by `id="businessTableHeader"`) may be absent in the "Residential Only" view. The logic dynamically counts the present headers.
 
 
-3. **Table body** (```html<tbody>```)
-- Structure: Contains multiple table rows (<tr>), each representing a specific EDDM route.
+3. **Table body** (`<tbody>`)
 
-4. **Data rows** (```html<tr>```)
-- Selector: tr.list-items within the <tbody>
-  - Also has valign="top" attribute "SOME WILL BE EMPTY"
-- Structure: Each row contains multiple table data cells <td>.
+  - Structure: Contains multiple table rows (<tr>), each representing a specific EDDM route.
 
-5. **Data cells**  (```html<td> within tr.list-items```):
-- <td>[0] (index 0): Row selection checkbox
-  - Contains: label > input.routeChex (Class routeChex is key). The input also has data-route-info and id attributes specific to the route.
-  - Purpose: Allows user selection of individual rows. Its checked status determines if the row is exported in "Export Selected" mode.
-  - Logic: IGNORED when extracting data values for the CSV columns. Checked status read via row.querySelector('td:first-child input.routeChex')?.checked.
+4. **Data rows** (`<tr>`)
+
+  - **Selector**: `tr.list-items` within the `<tbody>`
+    - Also has `valign="top"` attribute "SOME WILL BE EMPTY"
+  - **Structure**: Each row contains multiple table data cells `<td>`.
+
+5. **Data cells**  (`<td> within tr.list-items`)
+
+  - **`<td>[0] (index 0)`**: Row selection checkbox
+    - **Contains**: `label > input.routeChex` (Class routeChex is key). The input also has `data-route-info` and id attributes specific to the route.
+  - **Purpose**: Allows user selection of individual rows. Its checked status determines if the row is exported in "Export Selected" mode.
+  - **Logic**: IGNORED when extracting data values for the CSV columns. Checked status read via `row.querySelector('td:first-child input.routeChex')?.checked`.
