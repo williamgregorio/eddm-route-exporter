@@ -29,7 +29,7 @@ function getRowsToExport(type) {
     }
     return selectedRows;
   } else {
-    if (allRows === 0) {
+    if (allRows.length === 0) {
       console.warn("Export: No rows found in the table");
       alert("No route data rows found in the table.")
       return null
