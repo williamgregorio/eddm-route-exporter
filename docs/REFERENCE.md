@@ -8,9 +8,10 @@ This document should explain the HTML data structure of this date, founded on [e
 
 1. **Main table container**:
 - Selector: table.target-audience-table
-  - (Also has class col-12, but target-audience-table seems more specific)
-- Simple structure: Standard HTML table containing one <thead> and one <tbody> element.
+  - Also has class col-12, but target-audience-table seems more specific
+- Structure: Standard HTML table containing one <thead> and one <tbody> element.
 - Code reference: Targeted by document.querySelector('table.target-audience-table').
+
 2. **Table header** (```html<thead>```)
 - Structure: Contains a single header row (<tr>).
 - Header row selector: tr.target-audience-table-header
@@ -19,21 +20,21 @@ This document should explain the HTML data structure of this date, founded on [e
   - Contains: label > input#select-all-checkboxes
   - Purpose: UI element for selecting/deselecting all rows.
   - Logic: IGNORED when extracting column header titles.
+
 - <th>[1] onwards: Data column headers
   - Contains: Typically an <a> tag holding the column title text (e.g., "Route", "Residential", "Business", "Total", "Age...", "Size", "Income", "Cost"). May contain other elements like <img> (sort icons) or <span> (age range).
-
   - Purpose: Defines the meaning of the data in the corresponding column below.
-
   - Logic: Select all thead th, skip the first one (.slice(1)), then extract text using th.textContent.replace(/\s+/g, ' ').trim() to get the clean header title.
-
   - **Note**: The <th> containing "Business" (```html identified by id="businessTableHeader"```) may be absent in the "Residential Only" view. The logic dynamically counts the present headers.
 
 3. **Table body** (```html<tbody>```)
 - Structure: Contains multiple table rows (<tr>), each representing a specific EDDM route.
+
 4. **Data rows** (```html<tr>```)
-- Selector: tr.list-items (within the <tbody>)
-  - (Also has valign="top" attribute <<SOME WILL BE EMPTY>>)
-- Structure: Each row contains multiple table data cells (<td>).
+- Selector: tr.list-items within the <tbody>
+  - Also has valign="top" attribute <<SOME WILL BE EMPTY>>
+- Structure: Each row contains multiple table data cells <td>.
+
 5. **Data cells**  (```html<td> within tr.list-items```):
 - <td>[0] (index 0): Row selection checkbox
   - Contains: label > input.routeChex (Class routeChex is key). The input also has data-route-info and id attributes specific to the route.
