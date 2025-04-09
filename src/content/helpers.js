@@ -1,17 +1,20 @@
 const TABLE_SELECTOR = 'table.target-audience-table';
 
 export function getRowsToExport(type) {
-  const tableBody = document.querySelectorAll(`${TABLE_SELECTOR} tbody`);
-  if (!tableBody) {
+  const tableBodies = document.querySelectorAll(`${TABLE_SELECTOR} tbody`);
+  console.log(tableBodies); //NodeList verifcation [0]
+
+  if (!tableBodies || tableBodies.length === 0) {
     console.error("getRowsToExport: Could not find table body.");
     alert("Alert: Could not find a valid table.");
     // we can create something on the ui instead of alert.
     return null
   }
 
-  const allRows = tableBody.querySelector("tr.list-items");
+  const tableBody = tableBodies[0];
+  console.log(tableBody);
+  const allRows = tableBody.querySelectorAll("tr.list-items");
 
-  // please rm to check on type return
   if (type === 'selected') {
     // could be prompted for index so keep in mind else eh
     const selectedRows = Array.from(allRows).filter(row => {
@@ -71,9 +74,11 @@ export function extractDataFromRows(rowsNodeList) {
       console.warn("Export: Found a row with unexpected cell count.", row);
     }
   });
+  console.log(data);
   return data;
 }
 export function convertToCSV(dataArray) {
+  console.log(dataArray);
   return dataArray.map(row =>
     row.map(cell => {
       const cellText = cell.replace(/"/g, '""');
