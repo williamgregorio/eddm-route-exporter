@@ -7,7 +7,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === "EXPORT_COMMAND") {
     const exportType = message.exportType; // 'selected' or 'all' only
     console.log(`Content script (bundled): Received EXPORT_COMMAND for type: ${exportType}`);
-
     const csvString = scrapeAndExport(exportType);
 
     // data type can return null
