@@ -11,5 +11,5 @@
     "128": "icons/icon-128.png"
   },
   "permissions": ["activeTab", "scripting"],
-  "host_permissions": ["*://*.eddm.usps.com/*"]
+  "host_permissions": ["https://eddm.usps.com/*"]
 }
