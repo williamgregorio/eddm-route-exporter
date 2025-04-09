@@ -25,8 +25,7 @@ module.exports = (env, argv) => {
           { from: 'src/manifest.json', to: 'manifest.json' },
           { from: 'src/icons', to: 'icons' },
           { from: 'src/popup/popup.html', to: 'popup/popup.html' },
-          // Let's first see if needed:
-          // { from: './tailwindcss_cdn_4.1.3.js', to: './tailwindcss_cdn_4.1.3.js' }
+          { from: 'src/vendor/tailwindcss_cdn_4.1.3.js', to: 'vendor/tailwindcss_cdn_4.1.3.js' }
         ],
       }),
     ],
