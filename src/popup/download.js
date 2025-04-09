@@ -4,6 +4,7 @@ export function downloadCSV(csvContent, filename) {
     alert("Could not download file: No valid data was generated.");
     return;
   }
+  console.log(csvContent);
 
   if (typeof filename !== 'string' || !filename) {
     console.warn("Download warning: No filename provided, using default check reference.");
