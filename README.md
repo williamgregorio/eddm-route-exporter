@@ -16,7 +16,10 @@ e.g 12354,12345,etc
   - (checkbox) PO Box™
 
 ## Goals:
-- For cost turn string to number(js)
+- For total cost turn string(pop>char[$]) to number type(js).
+- Construct headers based on theader for accurate export on selection regardless on standard feature type.
+- Start for all rows as default export button with no selection context.
+- Iterate cells on selected for check bool and pass it ova to the next function.
 
 ## Analysis:
 - **table** ~ (object) =:> .target-audience-table
@@ -41,4 +44,5 @@ e.g 12354,12345,etc
   </tr>
 </thead>
 ```
-- table.children[1] = tbody>tr (If user uses standard features)
+- table.children[1] = tbody>tr (some trs have nothing, you must check when empty and skip)
+- table.children[1].children[100].children[0].children[0].children[0].checked (after selecting a tr, you have to go deeper to reach element)
