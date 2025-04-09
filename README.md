@@ -10,7 +10,7 @@ Saves time, by exporting route data from eddm.usps.com into a csv format.
 e.g 12354,12345,etc
 ```
 - In the table header by **"Target Audience"** and viewing as **"Map"** you may select business and residential or residential only routes.
-- In the table header you may select type of routes when viewing as **"Map"** with options like else all is default:
+- In the table header you may select type of routes when viewing as **"Map"** with options like: (**else all is default**):
   - (checkbox) City
   - (checkbox) Rural/Highway
   - (checkbox) PO Box™
@@ -20,7 +20,7 @@ e.g 12354,12345,etc
 
 ## Analysis:
 - **table** ~ (object) =:> .target-audience-table
-- table.children[0] = thead>tr>
+- table.children[0] = thead>tr> (Default else when using standard features, some will pop like Residential or Business)
 ```html
 <thead>
   <tr class="target-audience-table-header">
@@ -41,4 +41,4 @@ e.g 12354,12345,etc
   </tr>
 </thead>
 ```
-- table selection (object).children[1] : body
+- table.children[1] = tbody>tr (If user uses standard features)
