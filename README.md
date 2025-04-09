@@ -17,6 +17,6 @@ e.g 12354,12345,etc
 
 ## Goals:
 - For total cost turn string(pop>char[$]) to number type(js).
-- Construct headers based on theader for accurate export on selection regardless on standard feature type.
+- ~~Construct headers based on theader for accurate export on selection regardless on standard feature type~~.
 - Start for all rows as default export button with no selection context.
 - Iterate cells on selected for check bool and pass it ova to the next function.
