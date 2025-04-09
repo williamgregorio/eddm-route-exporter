@@ -13,7 +13,18 @@ e.g 12354,12345,etc
 ## Analysis:
 - table selection (object) : .target-audience-table
 - table selection (object).children[0] : thead>tr>
-  - ```html
+  - ```xhtml
   <html>table code test</html>
   ```
 - table selection (object).children[1] : body
+
+
+```html
+<body>content test</body>
+```
+
+```xhtml
+<body>content test</body>
+```
+
+<body>content raw</body>
