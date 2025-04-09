@@ -11,7 +11,7 @@ This document should explain the HTML data structure of this date, founded on [e
   - (Also has class col-12, but target-audience-table seems more specific)
 - Simple structure: Standard HTML table containing one <thead> and one <tbody> element.
 - Code reference: Targeted by document.querySelector('table.target-audience-table').
-2. **Table header** (<thead>)
+2. **Table header** (```html<thead>```)
 - Structure: Contains a single header row (<tr>).
 - Header row selector: tr.target-audience-table-header
 - Header cells (<th> within the header row):
@@ -24,3 +24,9 @@ This document should explain the HTML data structure of this date, founded on [e
   - Purpose: Defines the meaning of the data in the corresponding column below.
   - Logic: Select all thead th, skip the first one (.slice(1)), then extract text using th.textContent.replace(/\s+/g, ' ').trim() to get the clean header title.
   - **Note**: The <th> containing "Business" (identified by id="businessTableHeader") may be absent in the "Residential Only" view. The logic dynamically counts the present headers.
+3. **Table body** (```html<tbody>```)
+- Structure: Contains multiple table rows (<tr>), each representing a specific EDDM route.
+4. **Data rows** (```html<tr>```)
+- Selector: tr.list-items (within the <tbody>)
+  - (Also has valign="top" attribute <<SOME WILL BE EMPTY>>)
+- Structure: Each row contains multiple table data cells (<td>).
