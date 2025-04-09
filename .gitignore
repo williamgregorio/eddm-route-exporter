@@ -38,3 +38,6 @@ jspm_packages
 
 # Reduce request, and play in the local on models
 /data/
+
+# mac stuff
+.DS_Store
