@@ -1,4 +1,4 @@
-const TABLE_SELECTOR = ".table.target-audience-table";
+const TABLE_SELECTOR = "table.target-audience-table";
 
 // helpers
 /**
