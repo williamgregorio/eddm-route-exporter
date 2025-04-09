@@ -82,6 +82,21 @@ function extractDataFromRows(rowsNodeList) {
   return data;
 }
 
+/**
+convert type Array from Array to a type string for csv
+**/
+function convertToCSV(dataArray) {
+  return dataArray.map(row =>
+    row.map(cell => {
+      const cellText = cell.replace(/"/g, '""');
+      if (cellText.includes(',') || cellText.includes('"') || cellText.includes('\n')) {
+        return `"${cellText}"`; // enclose ""
+      }
+      return cellText;
+    }).join(',')
+  ).join('\n');
+}
+
 function scrapeAndExport(exportType) {
   return exportType; // each btn can determine context
 }
