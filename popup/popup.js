@@ -5,7 +5,7 @@ const TABLE_SELECTOR = ".table.target-audience-table";
 return null
 **/
 function getRowsToExport(type) {
-  const tableBody = document.querySelector(`${TABLE_SELECTOR} tbody`);
+  const tableBody = document.querySelectorAll(`${TABLE_SELECTOR} tbody`);
   if (!tableBody) {
     console.error("getRowsToExport: Could not find table body.");
     alert("Alert: Could not find a valid table.");
