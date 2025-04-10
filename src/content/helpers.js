@@ -2,8 +2,6 @@ const TABLE_SELECTOR = 'table.target-audience-table';
 
 export function getRowsToExport(type) {
   const tableBodies = document.querySelectorAll(`${TABLE_SELECTOR} tbody`);
-  console.log(tableBodies); //NodeList verifcation [0]
-
   if (!tableBodies || tableBodies.length === 0) {
     console.error("getRowsToExport: Could not find table body.");
     alert("Alert: Could not find a valid table.");
@@ -12,12 +10,11 @@ export function getRowsToExport(type) {
   }
 
   const tableBody = tableBodies[0];
-  console.log(tableBody);
   const allRows = tableBody.querySelectorAll("tr.list-items");
 
   if (type === 'selected') {
-    // could be prompted for index so keep in mind else eh
     const selectedRows = Array.from(allRows).filter(row => {
+      console.log(row);
       const checkbox = row.querySelector("td:first-child input.routeChex");
       return checkbox && checkbox.checked // refer to reference
     });
@@ -26,6 +23,7 @@ export function getRowsToExport(type) {
       alert("No routes are currently selected. Please check the boxes next to the routes you want to export.");
       return null;
     }
+    console.log("getRowsToExport (selected): Selected rows found:", selectedRows); // ADD THIS LINE
     return selectedRows;
   } else {
     if (allRows.length === 0) {
@@ -33,6 +31,7 @@ export function getRowsToExport(type) {
       alert("No route data rows found in the table.")
       return null
     }
+    console.log(allRows);
     return allRows; // type NodeList
   }
 }
@@ -61,6 +60,7 @@ export function extractDataFromRows(rowsNodeList) {
   const rows = Array.from(rowsNodeList);
   rows.forEach(row => {
     const cells = row.querySelectorAll('td');
+    console.log("Cells:", cells);
     if (cells.length > 2) {
       // may expect checkbox cell, data cells, and maybe a trailing empty one in reference
       // skip first cell of type (checkbox), and potentially skip last cell if it's empty
@@ -71,7 +71,8 @@ export function extractDataFromRows(rowsNodeList) {
         .map(cell => cell.textContent.trim());
       data.push(rowData);
     } else {
-      console.warn("Export: Found a row with unexpected cell count.", row);
+      console.log("Export dev: Found a row with unexpected cell count.", row);
+      return null;
     }
   });
   console.log(data);
