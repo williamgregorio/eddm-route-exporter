@@ -10,7 +10,7 @@
   "icons": {
     "128": "icons/icon-128.png"
   },
-  "permissions": ["activeTab", "tabs"],
+  "permissions": ["activeTab"],
   "host_permissions": ["https://eddm.usps.com/*"],
   "content_scripts": [
     {
