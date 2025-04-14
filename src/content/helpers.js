@@ -14,7 +14,6 @@ export function getRowsToExport(type) {
 
   if (type === 'selected') {
     const selectedRows = Array.from(allRows).filter(row => {
-      console.log(row);
       const checkbox = row.querySelector("td:first-child input.routeChex");
       return checkbox && checkbox.checked // refer to reference
     });
@@ -23,7 +22,6 @@ export function getRowsToExport(type) {
       alert("No routes are currently selected. Please check the boxes next to the routes you want to export.");
       return null;
     }
-    console.log("getRowsToExport (selected): Selected rows found:", selectedRows); // ADD THIS LINE
     return selectedRows;
   } else {
     if (allRows.length === 0) {
@@ -31,7 +29,6 @@ export function getRowsToExport(type) {
       alert("No route data rows found in the table.")
       return null
     }
-    console.log(allRows);
     return allRows; // type NodeList
   }
 }
@@ -60,7 +57,6 @@ export function extractDataFromRows(rowsNodeList) {
   const rows = Array.from(rowsNodeList);
   rows.forEach(row => {
     const cells = row.querySelectorAll('td');
-    console.log("Cells:", cells);
     if (cells.length > 2) {
       // may expect checkbox cell, data cells, and maybe a trailing empty one in reference
       // skip first cell of type (checkbox), and potentially skip last cell if it's empty
@@ -71,15 +67,12 @@ export function extractDataFromRows(rowsNodeList) {
         .map(cell => cell.textContent.trim());
       data.push(rowData);
     } else {
-      console.log("Export dev: Found a row with unexpected cell count.", row);
       return null;
     }
   });
-  console.log(data);
   return data;
 }
 export function convertToCSV(dataArray) {
-  console.log(dataArray);
   return dataArray.map(row =>
     row.map(cell => {
       const cellText = cell.replace(/"/g, '""');
