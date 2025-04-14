@@ -86,11 +86,12 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.status === 'success' && message.data) {
       try {
         // we can also disable buttons and delay on a given time.
+        const filename = `eddm_export_${message.exportType || 'data'}_${new Date().toISOString().slice(0, 10)}.csv`;
         downloadCSV(message.data, filename); // Use enhanced download helper
         if (uiMessage) uiMessage.textContent = `Successfully exported ${filename}.`
         // if we window close, I suppose it's the extension only, or we can just disable the buttons, and give the user freedom.
       } catch (error) {
-        if (uiMessage) uiMessage.textContent = `Download: failed: ${error.message}`;
+        if (uiMessage) uiMessage.textContent = `Download: failed: ${error.message} 93`;
       }
     } else {
       if (uiMessage) uiMessage.textContent = "Export failed: No data extracted or an error occurred on the page. :111";
