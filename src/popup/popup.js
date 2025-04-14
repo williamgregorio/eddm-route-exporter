@@ -60,38 +60,66 @@ async function handleExportClick(exportType) {
       });
   } catch (error) {
     console.error(`Error: Processing export ${exportType} most likely type is wrong:`, error);
-    alert(`An unexpected error occurred: ${error.message}`);
+    if (uiMessage) uiMessage.textContent = `Error: ${error.message}`;
   }
 }
 
+/**
+*
+* Setup for event listeners on buttons.
+*/
 function setupListeners() {
-  if (listenersAttached) return;
-  listenersAttached = true;
+  // removes duplication
+  if (listenersAttached){
+    return;
+  };
 
   const exportSelectedBtn = document.getElementById("exportSelectedBtn");
   const exportAllBtn = document.getElementById("exportAllBtn");
 
   if (!exportSelectedBtn || !exportAllBtn) {
-    console.error("On setup from listener, buttons are missing!.");
+    console.error("Setup error from listener.");
+    if (uiMessage) uiMessage.textContent = "Error: Popup UI elements missing.";
     return;
   }
 
   exportSelectedBtn.addEventListener("click", () => handleExportClick("selected"));
   exportAllBtn.addEventListener("click", () => handleExportClick("all"));
+
+  listenersAttached = true;
 }
 
+/**
+* Listens from messages sent back from our content_script.
+**/
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === "EXPORT_RESULT") {
-    uiMessage.textContent += `Popup chrome.runtime.onMessage() -> message.action: Received export result ${message}`;
+    // may delete since, it can confuse users.
+    if (uiMessage) uiMessage.textContent = `Received data for ${message.exportType}...`;
     if (message.status === 'success' && message.data) {
+      // file name is basic, but it works, perhaps something else in the future if it brings value.
       const filename = `eddm_export_${message.exportType || 'data'}_${new Date().toISOString().slice(0, 10)}.csv`;
-      console.log(message.data);
-      downloadCSV(message.data, filename); // Use enhanced download helper
+      try {
+        // we can also disable buttons and delay on a given time.
+        downloadCSV(message.data, filename); // Use enhanced download helper
+        if (uiMessage) uiMessage.textContent = `Success: ${filename} ready.`
+        // if we window close, I suppose it's the extension only, or we can just disable the buttons, and give the user freedom.
+      } catch (error) {
+        if (uiMessage) uiMessage.textContent = `Download: failed: ${error.message}`;
+      }
     } else {
-      uiMessage.textContent += "Export failed or no data has been returned from your content script.";
+      if (uiMessage) uiMessage.textContent = "Export failed: No data extracted or an error occurred on the page. :111";
     }
   }
   return false;
 });
 
+/**
+* Init on popup by setting up listeners when DOM is loaded.
+**/
 document.addEventListener('DOMContentLoaded', setupListeners, { once: true });
+
+// Give this a try and see if it's helpful
+if (uiMessage) {
+    uiMessage.textContent = "Ready to export EDDM routes.";
+}
