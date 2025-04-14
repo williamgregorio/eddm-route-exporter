@@ -1,6 +1,6 @@
 {
   "name": "USPS EDDM Route Exporter",
-  "description": "Extracts EDDM route data from the USPS website table to a CSV file.",
+  "description": "Exports EDDM routes data from the USPS website into a CSV file.",
   "version": "0.1.0",
   "manifest_version": 3,
   "action": {
@@ -11,12 +11,12 @@
     "128": "icons/icon-128.png"
   },
   "permissions": ["activeTab"],
-  "host_permissions": ["https://eddm.usps.com/*"],
+  "host_permissions": ["https://eddm.usps.com/eddm/select-routes.htm*"],
   "content_scripts": [
     {
-      "matches": ["https://eddm.usps.com/*"],
+      "matches": ["https://eddm.usps.com/eddm/select-routes.htm*"],
       "js": ["content_script.bundle.js"],
-      "run_at": "document_end"
+      "run_at": "document_idle"
     }
   ]
 }
