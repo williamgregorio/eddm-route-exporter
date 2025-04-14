@@ -8,38 +8,26 @@ let listenersAttached = false;
 * @param {string} exportType - selected or all
 **/
 async function handleExportClick(exportType) {
-  if (uiMessage) uiMessage.textContent = `Starting export: ${exportType}...`;
+  if (uiMessage) uiMessage.textContent = `Starting to export: ${exportType}...`;
 
   try {
     const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
-
-    if (chrome.runtime.lastError) {
-      throw new Error(`Query error: ${chrome.runtime.lastError.message}`);
-    }
-
     if (!tabs || tabs.length === 0 || !tabs[0]?.id) {
       throw new Error("Could not identify active tab.");
     }
 
     const activeTab = tabs[0];
     const activeTabId = activeTab.id;
-    console.log(`Dev::Active tab found. ID: ${activeTabId}, URL: ${activeTab.url}`);
 
     try {
-      const response = await chrome.tabs.sendMessage(activeTabId, { action: "PING" });
-      console.log(response);
-
-      if (response?.status !== "PONG") {
-        console.log(response);
-        console.log("PONG where're you buddy?");
+      const response = await chrome.tabs.sendMessage(activeTabId, {action: "PING"});
+      if (response?.status !== "PING") {
         console.error("Ping check failed: Invalid response received:", response);
         throw new Error("Page script didn't respond correctly. Try reloading the page.");
       }
-      console.log("Pong aware, content script confirmed and ready.");
-
-    } catch (pingError) {
-      console.error("Error occurred during PING:", pingError);
-      if (pingError.message.includes("Receiving end does not exist")) {
+    } catch (error) {
+      console.error("Error occurred during PING:", error);
+      if (error.message.includes("Receiving end does not exist")) {
         throw new Error("Cannot connect to the script on the EDDM page. Please reload the page and try again.");
       } else {
         throw new Error(`Connection error: ${pingError.message}`);
@@ -47,7 +35,6 @@ async function handleExportClick(exportType) {
     }
 
     if (uiMessage) uiMessage.textContent = `Requesting ${exportType} export...`;
-
     chrome.tabs.sendMessage(
       activeTabId,
       {
@@ -88,7 +75,6 @@ function setupListeners() {
 
   exportSelectedBtn.addEventListener("click", () => handleExportClick("selected"));
   exportAllBtn.addEventListener("click", () => handleExportClick("all"));
-
   listenersAttached = true;
 }
 
@@ -97,15 +83,11 @@ function setupListeners() {
 **/
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === "EXPORT_RESULT") {
-    // may delete since, it can confuse users.
-    if (uiMessage) uiMessage.textContent = `Received data for ${message.exportType}...`;
     if (message.status === 'success' && message.data) {
-      // file name is basic, but it works, perhaps something else in the future if it brings value.
-      const filename = `eddm_export_${message.exportType || 'data'}_${new Date().toISOString().slice(0, 10)}.csv`;
       try {
         // we can also disable buttons and delay on a given time.
         downloadCSV(message.data, filename); // Use enhanced download helper
-        if (uiMessage) uiMessage.textContent = `Success: ${filename} ready.`
+        if (uiMessage) uiMessage.textContent = `Successfully exported ${filename}.`
         // if we window close, I suppose it's the extension only, or we can just disable the buttons, and give the user freedom.
       } catch (error) {
         if (uiMessage) uiMessage.textContent = `Download: failed: ${error.message}`;
@@ -122,7 +104,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 **/
 document.addEventListener('DOMContentLoaded', setupListeners, { once: true });
 
-// Give this a try and see if it's helpful
+// Giving this a try and see if it's helpful
 if (uiMessage) {
     uiMessage.textContent = "Ready to export EDDM routes.";
 }
