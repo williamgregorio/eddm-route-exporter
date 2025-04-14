@@ -27,8 +27,11 @@ async function handleExportClick(exportType) {
 
     try {
       const response = await chrome.tabs.sendMessage(activeTabId, { action: "PING" });
+      console.log(response);
 
       if (response?.status !== "PONG") {
+        console.log(response);
+        console.log("PONG where're you buddy?");
         console.error("Ping check failed: Invalid response received:", response);
         throw new Error("Page script didn't respond correctly. Try reloading the page.");
       }
