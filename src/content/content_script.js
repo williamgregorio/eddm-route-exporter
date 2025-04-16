@@ -3,7 +3,6 @@ let hasListener = false;
 
 if (!hasListener) {
   hasListener = true;
-
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.action === "PING") {
       sendResponse({ status: "PING" });
@@ -23,5 +22,4 @@ if (!hasListener) {
     }
     return undefined;
   });
-} else {
 }
