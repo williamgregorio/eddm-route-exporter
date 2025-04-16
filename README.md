@@ -20,3 +20,8 @@ e.g 12354,12345,etc
 - ~~Construct headers based on theader for accurate export on selection regardless on standard feature type~~.
 - ~~Start for all rows as default export button with no selection context.~~
 - ~~Iterate cells on selected for check bool and pass it ova to the next function.~~
+
+
+## Current:
+[x] copyAll works
+[x] copySelected works
