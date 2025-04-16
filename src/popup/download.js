@@ -21,7 +21,7 @@ export function downloadCSV(csvContent, filename) {
     link.setAttribute('download', filename);
     link.style.visibility = 'hidden';
     document.body.appendChild(link);
-    link.click(); // wonky but it works
+    link.click();
     document.body.removeChild(link);
   } catch (error) {
     console.error("Download error during new Blob/Link creation or click:", error);
