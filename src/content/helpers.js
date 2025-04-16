@@ -4,8 +4,7 @@ export function getRowsToExport(type) {
   const tableBodies = document.querySelectorAll(`${TABLE_SELECTOR} tbody`);
   if (!tableBodies || tableBodies.length === 0) {
     console.error("getRowsToExport: Could not find table body.");
-    alert("Alert: Could not find a valid table.");
-    // we can create something on the ui instead of alert.
+    //alert("Alert: Could not find a valid table.");
     return null
   }
 

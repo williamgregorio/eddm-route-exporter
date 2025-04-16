@@ -65,11 +65,13 @@ function setupListeners() {
   };
 
   const exportSelectedBtn = document.getElementById("exportSelectedBtn");
+  const copySelectedBtn = document.getElementById("copySelectedBtn");
   const exportAllBtn = document.getElementById("exportAllBtn");
+  const copyAllBtn = document.getElementById("copyAllBtn")
 
-  if (!exportSelectedBtn || !exportAllBtn) {
+  if (!exportSelectedBtn || !exportAllBtn && !copySelectedBtn || !copyAllBtn) {
     console.error("Setup error from listener.");
-    if (uiMessage) uiMessage.textContent = "Error: Popup UI elements missing.";
+    if (uiMessage) uiMessage.textContent = "Error: Correct buttons are missing.";
     return;
   }
 

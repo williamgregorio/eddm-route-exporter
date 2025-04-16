@@ -21,7 +21,7 @@ if (!hasListener) {
       });
       return false;
     }
-    return undefined; // I say it's fine, since it speaks for itself.
+    return undefined;
   });
 } else {
 }

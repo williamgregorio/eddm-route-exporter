@@ -2,7 +2,6 @@ import { getRowsToExport, extractDataFromRows, convertToCSV } from './helpers.js
 
 export function scrapeAndExport(exportType) {
   const rowsToExport = getRowsToExport(exportType);
-
   if (!rowsToExport) {
     return null;
   }
