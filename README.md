@@ -9,8 +9,17 @@ Saves you time by being able to export route data into a .csv file or quickly co
 e.g 12354,12345,etc
 ```
 
-- When you view as **"Map"** and click on "Residential ^" you have two options, **"Residential and Business Routes (Default)"** or "Residential Routes Only"**.
+- When you view as **"Map"** and click on "Residential ^" you have two options, **"Residential and Business Routes (Default)"** or **"Residential Routes Only"**.
 - When you view as **"Map"** and click on "Route ^" you may select what type of routes (**Default: All**), these are your choices:
   - (checkbox) City
   - (checkbox) Rural/Highway
   - (checkbox) PO Box™
+
+## Features:
+There is four buttons.
+1. Copy Selected
+2. Copy All Routes
+3. Export Selected
+4. Export All Routes 
+
+
