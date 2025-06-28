@@ -106,9 +106,9 @@ export function extractDataFromRows(rowsNodeList) {
 }
 
 /**
-*
-* @param {string[][]} dataArray
-* @returns {string} - In hopes of a formatted csv string
+* We use dataArray to convert into a .csv format.
+* @param {any[][]} dataArray
+* @returns {string} 
 */
 export function convertToCSV(dataArray) {
   return dataArray.map(row =>
