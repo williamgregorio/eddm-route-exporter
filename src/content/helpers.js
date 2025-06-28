@@ -1,19 +1,22 @@
 const TABLE_SELECTOR = 'table.target-audience-table';
 
 /**
-*
-* @param {string} type
-* @returns string[][]
+* Returns an a NodeListOf<Element> or Element[] if selection is true.
+* @example 
+* if type -> selected (user wants all data rows into their system clipboard)
+* if type -> copySelected (user has used checkbox as true and wants this data rows into their system clipboard)
+* @param {string} type - e.g (selected, copySelected)
+* @returns {NodeListOf<Element>}
 */
 export function getRowsToExport(type) {
-  const tableBodies = document.querySelectorAll(`${TABLE_SELECTOR} tbody`);
-  if (!tableBodies || tableBodies.length === 0) {
+  const tableBodyNodeList = document.querySelectorAll(`${TABLE_SELECTOR} tbody`);
+  if (!tableBodyNodeList || tableBodyNodeList.length === 0) {
     console.error("getRowsToExport: Could not find table body.");
-    alert("Alert: Could not find a valid table.");
+    alert("Warning: Could not find a table.");
     return null
   }
 
-  const tableBody = tableBodies[0];
+  const tableBody = tableBodyNodeList[0];
   const allRows = tableBody.querySelectorAll("tr.list-items");
 
   if (type === 'selected' || type === 'copySelected') {
@@ -21,11 +24,12 @@ export function getRowsToExport(type) {
       const checkbox = row.querySelector("td:first-child input.routeChex");
       return checkbox && checkbox.checked
     });
-    // no data important
+
     if (selectedRows.length === 0) {
       console.warn("Export: No rows selected.");
       return null;
     }
+
     return selectedRows;
   } else {
     if (allRows.length === 0) {
@@ -35,6 +39,7 @@ export function getRowsToExport(type) {
     return allRows;
   }
 }
+
 export function extractDataFromRows(rowsNodeList) {
   const data = [];
   const table = document.querySelector(TABLE_SELECTOR);
@@ -71,12 +76,8 @@ export function extractDataFromRows(rowsNodeList) {
 
     if (isBusinessHeaderDisplayed(headerCells)) {
       data.push(residentialAndBusinessHeaders);
-      console.log("not removing business header");
-      console.log(residentialAndBusinessHeaders);
     } else {
       data.push(residentialHeaders);
-      console.log("removed business header");
-      console.log(residentialHeaders);
     }
   } else {
     console.warn("Export: Could not find enough header cells.");
