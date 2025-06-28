@@ -1,6 +1,6 @@
 {
-  "name": "eddm-route-exporter",
-  "version": "0.1.0",
+  "name": "export-eddm-routes",
+  "version": "0.2.0",
   "description": "Saves you time by exporting route data from eddm.usps.com into a csv format.",
   "main": "main.js",
   "directories": {
