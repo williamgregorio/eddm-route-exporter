@@ -7,6 +7,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps: 
       - name: Checkout code
@@ -37,11 +39,10 @@ jobs:
 
       - name: Zip extension with version number
         run: |
-          zip -r export-eddm-routes-v${{ env.VERSION }}.zip dist/*
+          cd dist
+          zip -r ../export-eddm-routes-v${{ env.VERSION }}.zip .
 
       - name: Upload zip to release
         uses: softprops/action-gh-release@v2
         with:
           files: export-eddm-routes-v${{ env.VERSION }}.zip
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
