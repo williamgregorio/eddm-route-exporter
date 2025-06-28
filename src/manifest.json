@@ -1,5 +1,5 @@
 {
-  "name": "USPS EDDM Route Exporter",
+  "name": "Export USPS EDDM® Routes",
   "description": "Easily export USPS EDDM route data to a CSV file or copy it directly to your clipboard.",
   "version": "0.2.0",
   "manifest_version": 3,

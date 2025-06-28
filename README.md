@@ -1,4 +1,4 @@
-# USPS EDDM Route Exporter Chrome Extension <img src="https://github.com/williamgregorio/eddm-route-exporter/blob/main/assets/eddm-exporter-extension-icon-0.2.0.png" width="116" height="116" alt="icon for eddm route exporter" />
+# Export USPS EDDM® Routes - Chrome Extension <img src="https://github.com/williamgregorio/eddm-route-exporter/blob/main/assets/eddm-exporter-extension-icon-0.2.0.png" width="98" height="98" alt="icon for eddm route exporter" />
 
 ## Tool purpose:
 Saves you time by exporting route data from eddm.usps.com into a csv format.
@@ -15,14 +15,3 @@ e.g 12354,12345,etc
   - (checkbox) Rural/Highway
   - (checkbox) PO Box™
 
-## Goals:
-- ~~Construct headers based on theader for accurate export on selection regardless on standard feature type~~.
-- ~~Start for all rows as default export button with no selection context.~~
-- ~~Iterate cells on selected for check bool and pass it ova to the next function.~~
-- Need to create ui messaging on click, to much access for the user.
-- Construct from data parse, headers from body, return sortations, and selection on best routes
-
-
-## Current:
-[x] - copyAll works
-[x] - copySelected works
