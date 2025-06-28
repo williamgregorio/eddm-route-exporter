@@ -42,14 +42,42 @@ export function extractDataFromRows(rowsNodeList) {
     console.error("extractDataFromRows: Could not find table.");
     return [];
   }
-  // refer to refernce - thead
+
   const headerCells = table.querySelectorAll('thead th');
   if (headerCells.length > 1) {
-    // skip the first header of type (checkbox) and clean up
-    const headers = Array.from(headerCells).slice(1).map(th =>
-      th.textContent.replace(/\s+/g, ' ').trim()
-    );
-    data.push(headers);
+    let headers = Array.from(headerCells).slice(1);
+    
+    function isBusinessHeaderDisplayed(headers) {
+      for (let i = 0; i < headers.length; i++) {
+        let th = headers[i];
+        if (th.id === "businessTableHeader" && th.style.display === "") {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    function trimText(text) {
+      return text.textContent.trim();
+    }
+
+    const residentialAndBusinessHeaders = headers.map(th => {
+      return trimText(th)
+    })
+
+    const residentialHeaders = headers.filter(th => th.id !== "businessTableHeader").map(th => {
+      return trimText(th)
+    })
+
+    if (isBusinessHeaderDisplayed(headerCells)) {
+      data.push(residentialAndBusinessHeaders);
+      console.log("not removing business header");
+      console.log(residentialAndBusinessHeaders);
+    } else {
+      data.push(residentialHeaders);
+      console.log("removed business header");
+      console.log(residentialHeaders);
+    }
   } else {
     console.warn("Export: Could not find enough header cells.");
   }
