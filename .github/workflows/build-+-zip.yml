@@ -23,6 +23,13 @@ jobs:
       - name: Build extension
         run: npm run build
 
+      - name: Check dist/ contents success
+        run: |
+          if [ ! -f dist/manifest.json ]; then
+            echo "Build failed: dist/manifest.json not found."
+            exit 1
+          fi
+
       - name: Get version from manifest.json and store to GitHub env
         run: |
           VERSION=$(jq -r '.version' dist/manifest.json)
@@ -30,9 +37,7 @@ jobs:
 
       - name: Zip extension with version number
         run: |
-          cd dist
-          zip -r ../export-eddm-routes-v${{ env.VERSION }}.zip .
-          cd ..
+          zip -r export-eddm-routes-v${{ env.VERSION }}.zip dist/*
 
       - name: Upload zip to release
         uses: softprops/action-gh-release@v2
