@@ -2,6 +2,7 @@ let rawData = ``
 
 let lines = rawData.trim().split("\n")
 let headerLines = lines.shift()
+console.log(headerLines);
 let dataLines = lines;
 
 
@@ -21,7 +22,8 @@ let processedData = dataLines.map(line => {
         } else if (header === "Size" || header === "Cost") {
             processedValue = parseFloat(stringValue.replace("$", ""))
         } else if (header === "Income") {
-            processedValue = parseFloat(stringValue.replace("$", "").replace("k", "")) * 1000
+            let incomeDirt = parseFloat(stringValue.replace("$", "").replace("k", "")) * 1000
+            console.log(incomeDirt);
         } else {
             processedValue = stringValue
         }
