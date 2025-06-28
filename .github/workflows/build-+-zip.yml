@@ -1,0 +1,42 @@
+name: Build and upload Chrome extension as .zip to GitHub Release
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps: 
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build extension
+        run: npm run build
+
+      - name: Get version from manifest.json and store to GitHub env
+        run: |
+          VERSION=$(jq -r '.version' dist/manifest.json)
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Zip extension with version number
+        run: |
+          cd dist
+          zip -r ../export-eddm-routes-v${{ env.VERSION }}.zip .
+          cd ..
+
+      - name: Upload zip to release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: export-eddm-routes-v${{ env.VERSION }}.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
