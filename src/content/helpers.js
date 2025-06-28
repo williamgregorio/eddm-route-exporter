@@ -40,6 +40,11 @@ export function getRowsToExport(type) {
   }
 }
 
+/**
+* Accepts NodeList to build row body as length from headers of table body.
+* @param {NodeList} rowsNodeList 
+* @returns {any[][]} 
+*/
 export function extractDataFromRows(rowsNodeList) {
   const data = [];
   const table = document.querySelector(TABLE_SELECTOR);
@@ -83,14 +88,10 @@ export function extractDataFromRows(rowsNodeList) {
     console.warn("Export: Could not find enough header cells.");
   }
 
-  // body row data
   const rows = Array.from(rowsNodeList);
   rows.forEach(row => {
     const cells = row.querySelectorAll('td');
     if (cells.length > 2) {
-      // may expect checkbox cell, data cells, and a trailing empty one in reference
-      // skip first cell of type (checkbox), and potentially skip last cell if it's empty
-      // dynamically matches the number of data cells to the number of headers found << no it does not
       const numberOfHeaders = data[0]?.length || cells.length - 2;
       const rowData = Array.from(cells)
         .slice(1, 1 + numberOfHeaders)
@@ -100,6 +101,7 @@ export function extractDataFromRows(rowsNodeList) {
       return null;
     }
   });
+
   return data;
 }
 
