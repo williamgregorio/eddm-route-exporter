@@ -1,4 +1,4 @@
-# Export USPS EDDDM® Routes - Chrome Extension <img src="https://github.com/williamgregorio/eddm-route-exporter/blob/main/assets/eddm-exporter-extension-icon-0.2.0.png" width="116" height="116" alt="icon for eddm route exporter" />
+# Export USPS EDDM® Routes - Chrome Extension <img src="https://github.com/williamgregorio/eddm-route-exporter/blob/main/assets/eddm-exporter-extension-icon-0.2.0.png" width="98" height="98" alt="icon for eddm route exporter" />
 
 ## Tool purpose:
 Saves you time by exporting route data from eddm.usps.com into a csv format.
