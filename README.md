@@ -1,4 +1,6 @@
-<img style="float: right;" src="https://github.com/williamgregorio/eddm-route-exporter/blob/main/assets/eddm-exporter-extension-icon-0.2.0.png" width="98" height="98" alt="icon for eddm route exporter" />
+<p align="center">
+<img src="https://github.com/williamgregorio/eddm-route-exporter/blob/main/assets/eddm-exporter-extension-icon-0.2.0.png" width="98" height="98" alt="icon for eddm route exporter" />
+</p>
 
 # Export USPS EDDM® Routes - Chrome Extension 
 
